@@ -114,18 +114,20 @@ namespace HighchartsExportClient
 
         public async Task<byte[]> GetChartImageFromOptionsAsync(string options)
         {
-            var request = GetRequestSettings(options, getLink: false, isSvg: false);
-            var response = await MakeRequest(request).ConfigureAwait(false);
+            var res = await GetChartImageLinkFromOptionsAsync(options).ConfigureAwait(false);
 
-            return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+            var imgPulling = await _httpClient.GetAsync(res).ConfigureAwait(false);
+
+            return await imgPulling.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
         }
 
         public async Task<byte[]> GetChartImageFromSvgAsync(string svg)
         {
-            var request = GetRequestSettings(svg, getLink: false, isSvg: true);
-            var response = await MakeRequest(request).ConfigureAwait(false);
+            var res = await GetChartImageLinkFromSvgAsync(svg).ConfigureAwait(false);
 
-            return await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+            var imgPulling = await _httpClient.GetAsync(res).ConfigureAwait(false);
+
+            return await imgPulling.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
         }
 
         public async Task<string> GetChartImageLinkFromOptionsAsync(string options)

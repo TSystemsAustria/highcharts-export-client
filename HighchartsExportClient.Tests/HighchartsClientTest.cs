@@ -15,7 +15,13 @@ namespace HighchartsExportClient.Tests
         [TestMethod]
         public async Task GetImageBytesFromOptions_Works()
         {
-            var client = new HighchartsClient(_highchartsServer);
+            var settingsPng = new HighchartsSetting()
+            {
+                ServerAddress = _highchartsServer,
+                ExportImageType = "png"
+            };
+
+            var client = new HighchartsClient(settingsPng);
 
             var options = new
             {
@@ -110,7 +116,13 @@ namespace HighchartsExportClient.Tests
         [TestMethod]
         public async Task GetImageLinkFromSvg_Works()
         {
-            var client = new HighchartsClient(_highchartsServer);
+            var settingsPng = new HighchartsSetting()
+            {
+                ServerAddress = _highchartsServer,
+                ExportImageType = "png"
+            };
+
+            var client = new HighchartsClient(settingsPng);
 
             var res = await client.GetChartImageLinkFromSvgAsync(_svg);
 
@@ -121,7 +133,13 @@ namespace HighchartsExportClient.Tests
         [TestMethod]
         public async Task GetImageBytesFromSvg_Works()
         {
-            var client = new HighchartsClient(_highchartsServer);
+            var settingsPng = new HighchartsSetting()
+            {
+                ServerAddress = _highchartsServer,
+                ExportImageType = "png"
+            };
+
+            var client = new HighchartsClient(settingsPng);
 
             var res = await client.GetChartImageFromSvgAsync(_svg);
 
